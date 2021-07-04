@@ -24,12 +24,12 @@ class Category(models.Model):
 class Portfolio(models.Model):
     title = models.CharField(max_length=250, verbose_name='Название')
     slug = models.SlugField(max_length=160, unique=True)
-    description = RichTextUploadingField()
+    description = RichTextUploadingField(verbose_name='Описание проекта')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата публикации')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата обновления')
     image = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name='Фото проекта', blank=True)
     stack = TaggableManager()
-    website = models.URLField(max_length=250, blank=True, verbose_name='Демо')
+    website = models.URLField(max_length=250, blank=True, verbose_name='GitHub')
     demo = models.URLField(max_length=250, blank=True, verbose_name='Демо')
     category = models.ForeignKey('Category', on_delete=models.PROTECT, verbose_name='Категория',
                                  related_name='get_news')

@@ -24,11 +24,11 @@ class Category(models.Model):
 class Blog(models.Model):
     title = models.CharField(max_length=250, verbose_name='Название')
     slug = models.SlugField()
-    description = RichTextUploadingField()
+    description = RichTextUploadingField(verbose_name='Контент')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата публикации')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата обновления')
     image = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name='Фото портфолио', blank=True)
-    is_published = models.BooleanField(null=True, verbose_name='Опубликовано')
+    is_published = models.BooleanField(default=True, verbose_name='Опубликовано')
     tag = TaggableManager()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ForeignKey('Category', on_delete=models.PROTECT, verbose_name='Категория',
