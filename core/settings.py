@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'ckeditor',
     'ckeditor_uploader',
+    'taggit',
 
     'app_api.apps.AppApiConfig',
     'app_blog.apps.AppBlogConfig',
