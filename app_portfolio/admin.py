@@ -4,7 +4,7 @@ from .models import Category, Portfolio
 
 
 class PortfolioAdmin(admin.ModelAdmin):
-    list_display = ('title', 'created_at', 'updated_at', 'stack', 'category')
+    list_display = ('id', 'title', 'created_at', 'updated_at', 'stack', 'category')
     prepopulated_fields = {'slug': ('title',)}
     list_display_links = ('id', 'title')
     search_fields = ('title', 'description')
@@ -17,4 +17,4 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Portfolio, PortfolioAdmin)
-admin.site.register(Category)
+admin.site.register(Category, CategoryAdmin)
