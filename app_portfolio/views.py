@@ -1,8 +1,7 @@
 from django.shortcuts import render
 from django.views import View
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
-from app_blog.models import Blog
 from app_portfolio.models import Portfolio, Category
 
 
@@ -19,7 +18,8 @@ from app_portfolio.models import Portfolio, Category
 class PortfolioByCategory(ListView):
     model = Portfolio
     template_name = 'index.html'
-    context_object_name = 'projects'
+    context_object_name = 'cat_projects'
+    allow_empty = True
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(PortfolioByCategory, self).get_context_data()
@@ -43,3 +43,18 @@ class HomePortfolio(ListView):
 
     # def get_queryset(self):
     #     return Portfolio.objects.all()[0:3]
+
+
+class ViewProjects(DetailView):
+    model = Portfolio
+    template_name = 'app_portfolio/page-portfolio-detail.html'
+    context_object_name = 'detail_project'
+    allow_empty = True
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data()
+        context['title'] = Portfolio.objects.get(slug=self.kwargs['slug'])
+
+    def get_queryset(self):
+        return Portfolio.objects.filter(slug=self.kwargs['slug'])
+
