@@ -10,8 +10,8 @@ class Category(models.Model):
     description = RichTextUploadingField(blank=True)
     slug = models.SlugField(max_length=160, unique=True)
 
-    # def get_absolute_url(self):
-    #     return reverse_lazy('category', kwargs={"category_id": self.pk})
+    def get_absolute_url(self):
+        return reverse_lazy('category_projects', kwargs={"slug": self.slug})
 
     def __str__(self):
         return self.name
@@ -34,8 +34,8 @@ class Portfolio(models.Model):
     category = models.ForeignKey('Category', on_delete=models.PROTECT, verbose_name='Категория',
                                  related_name='get_news')
 
-    # def get_absolute_url(self):
-    #     return reverse_lazy('view_news', kwargs={"pk": self.pk})
+    def get_absolute_url(self):
+        return reverse_lazy('view_projects', kwargs={"slug": self.slug})
 
     def __str__(self):
         return self.title

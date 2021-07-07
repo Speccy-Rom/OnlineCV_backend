@@ -1,6 +1,7 @@
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.auth.models import User
 from django.db import models
+from django.urls import reverse_lazy
 from taggit.managers import TaggableManager
 
 
@@ -10,8 +11,8 @@ class Category(models.Model):
     description = RichTextUploadingField(blank=True, verbose_name='Описание категории')
     slug = models.SlugField(max_length=160, unique=True)
 
-    # def get_absolute_url(self):
-    #     return reverse_lazy('category', kwargs={"category_id": self.pk})
+    def get_absolute_url(self):
+        return reverse_lazy('category_posts', kwargs={"slug": self.slug})
 
     def __str__(self):
         return self.name
@@ -34,8 +35,8 @@ class Blog(models.Model):
     category = models.ForeignKey('Category', on_delete=models.PROTECT, verbose_name='Категория',
                                  related_name='get_news')
 
-    # def get_absolute_url(self):
-    #     return reverse_lazy('view_news', kwargs={"pk": self.pk})
+    def get_absolute_url(self):
+        return reverse_lazy('view_post', kwargs={"slug": self.slug})
 
     def __str__(self):
         return self.title
