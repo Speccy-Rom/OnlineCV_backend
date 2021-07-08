@@ -8,12 +8,12 @@ from app_portfolio.models import Portfolio, Category
 # class MainView(View):
 #     def get(self, request, *args, **kwargs):
 #         context = {}
-#         posts = Blog.objects.all()
+#         posts = Portfolio.objects.all()
 #         projects = Portfolio.objects.all()
 #         context['posts'] = posts
 #         context['projects'] = projects
 #         return render(request, 'index.html', context)
-
+#
 
 class PortfolioByCategory(ListView):
     model = Portfolio
@@ -33,7 +33,6 @@ class HomePortfolio(ListView):
     model = Portfolio
     template_name = 'index.html'
     context_object_name = 'projects'
-
     # extra_context = {'title': 'Главная'}
 
     def get_context_data(self, *, object_list=None, **kwargs):
