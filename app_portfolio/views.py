@@ -5,20 +5,16 @@ from django.views.generic import ListView, DetailView
 from app_portfolio.models import Portfolio, Category
 
 
-# class MainView(View):
-#     def get(self, request, *args, **kwargs):
-#         context = {}
-#         posts = Portfolio.objects.all()
-#         projects = Portfolio.objects.all()
-#         context['posts'] = posts
-#         context['projects'] = projects
-#         return render(request, 'index.html', context)
-#
+class HomePage(View):
+    def get(self, request, *args, **kwargs):
+        projects = Portfolio.objects.all()
+        return render(request, 'index.html', {'projects': projects})
+
 
 class PortfolioByCategory(ListView):
     model = Portfolio
     template_name = 'index.html'
-    context_object_name = 'cat_projects'
+    context_object_name = 'get_categories'
     allow_empty = True
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -29,19 +25,16 @@ class PortfolioByCategory(ListView):
         return Portfolio.objects.filter(slug=self.kwargs['slug'])
 
 
-class HomePortfolio(ListView):
+class ListPortfolio(ListView):
     model = Portfolio
-    template_name = 'index.html'
+    template_name = 'app_portfolio/page-portfolio.html'
     context_object_name = 'projects'
     # extra_context = {'title': 'Главная'}
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        context = super(HomePortfolio, self).get_context_data()
-        context['title'] = 'Home'
+        context = super(ListPortfolio, self).get_context_data()
+        context['title'] = 'My projects'
         return context
-
-    # def get_queryset(self):
-    #     return Portfolio.objects.all()[0:3]
 
 
 class ViewProjects(DetailView):

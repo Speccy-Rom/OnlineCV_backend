@@ -7,7 +7,7 @@ from taggit.managers import TaggableManager
 class Category(models.Model):
     """Категории"""
     name = models.CharField(verbose_name="Название категория", max_length=150)
-    description = RichTextUploadingField(blank=True)
+    description = RichTextUploadingField(blank=True, verbose_name='Описание')
     slug = models.SlugField(max_length=160, unique=True)
 
     def get_absolute_url(self):
@@ -22,6 +22,7 @@ class Category(models.Model):
 
 
 class Portfolio(models.Model):
+    """Модель проекта"""
     title = models.CharField(max_length=250, verbose_name='Название')
     slug = models.SlugField(max_length=160, unique=True)
     description = RichTextUploadingField(verbose_name='Описание проекта')
