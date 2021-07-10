@@ -1,17 +1,20 @@
 from django.contrib import admin
+from django.utils.safestring import mark_safe
 
 from .models import Blog, Category
 
 
 @admin.register(Blog)
 class BlogAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'created_at', 'updated_at', 'is_published', 'category')
+    list_display = ('id', 'get_image', 'title', 'created_at', 'updated_at', 'is_published', 'category', 'tag')
     prepopulated_fields = {'slug': ('title',)}
     list_display_links = ('id', 'title')
+    # list_filter = ('category', 'created_at')
+    # readonly_fields = ("get_image",)
     search_fields = ('title', 'description')
     save_on_top = True  # управление навигацие отобразится сверху
     save_as = True
-    list_editable = ("category",)  # редактирование поля в таблице списков проектов
+    list_editable = ("category", 'is_published')  # редактирование поля в таблице списков проектов
     fieldsets = (
         (None, {
             'fields': (('title', 'slug'),)
@@ -19,17 +22,25 @@ class BlogAdmin(admin.ModelAdmin):
         (None, {
             'fields': ('description', 'image'),
         }),
-
         ('Tags & Category', {
             'classes': ('collapse',),
-            'fields': (('stack', 'category'),)
+            'fields': (('tag', 'author', 'category'),)
         }),
-        ('Demo & Website project', {
-            'classes': ('collapse',),
-            'fields': (('website', 'demo'),)
+
+        (None, {
+            'fields': ('is_published',),
         }),
 
     )
+
+    ####################################
+    # Вывод картинок в админку #
+    ####################################
+    def get_image(self, obj):
+        return mark_safe(f'<img src={obj.image.url} width="90" height="50"')
+
+    get_image.short_description = "Изображение"
+    ####################################
 
 
 @admin.register(Category)
@@ -37,6 +48,3 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'description')
     prepopulated_fields = {'slug': ('name',)}
     list_display_links = ('id', 'name')
-
-
-

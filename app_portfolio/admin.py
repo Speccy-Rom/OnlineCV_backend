@@ -10,7 +10,7 @@ class PortfolioAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
     list_display_links = ('id', 'title')
     # list_filter = ('category', 'created_at')
-    # readonly_fields = ("get_image", )
+    readonly_fields = ("get_image", )
     search_fields = ('title', 'description', 'category__name')
     save_on_top = True  # управление навигацие отобразится сверху
     save_as = True
@@ -20,7 +20,7 @@ class PortfolioAdmin(admin.ModelAdmin):
             'fields': (('title', 'slug'),)
         }),
         (None, {
-            'fields': ('description', 'image'),
+            'fields': ('description', 'get_image'),
         }),
 
         ('Tags & Category', {

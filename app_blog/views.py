@@ -20,14 +20,14 @@ class BlogByCategory(ListView):
 
 class HomeBlog(ListView):
     model = Blog
-    template_name = 'index.html'
+    template_name = 'app_blog/page-blog.html'
     context_object_name = 'posts'
 
     # extra_context = {'title': 'Главная'}
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(HomeBlog, self).get_context_data()
-        context['title'] = 'Home'
+        context['title'] = 'Blog'
         return context
 
     # def get_queryset(self):
@@ -41,7 +41,7 @@ class ViewPosts(DetailView):
     allow_empty = True
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        context = super(ViewPosts).get_context_data()
+        context = super(ViewPosts, self).get_context_data()
         context['title'] = Blog.objects.get(slug=self.kwargs['slug'])
 
     def get_queryset(self):
