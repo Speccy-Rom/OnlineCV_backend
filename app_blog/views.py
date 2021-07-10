@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from django.views import View
 from django.views.generic import ListView, DetailView
+from taggit.models import Tag
 
 from app_blog.models import Blog, Category
 
@@ -46,3 +48,15 @@ class ViewPosts(DetailView):
 
     def get_queryset(self):
         return Blog.objects.filter(slug=self.kwargs['slug'])
+
+
+class TagView(View):
+    def get(self, request, slug, *args, **kwargs):
+        tag = get_object_or_404(Tag, slug=slug)
+        posts = Blog.objects.filter(tag=tag)
+        common_tags = Blog.tag.most_common()
+        return render(request, 'app_blog/tag/tag_blog.html', context={
+            'title': f'#ТЭГ {tag}',
+            'posts': posts,
+            'common_tags': common_tags
+        })
