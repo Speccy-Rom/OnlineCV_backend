@@ -5,7 +5,7 @@ class FeedBackForm(forms.Form):
     name = forms.CharField(
         max_length=100,
         widget=forms.TextInput(attrs={
-            'class': 'form-control',
+            'class': 'form-control border rounded',
             'id': 'name',
             'placeholder': "Ваше имя"
         })
@@ -13,7 +13,7 @@ class FeedBackForm(forms.Form):
     email = forms.CharField(
         max_length=100,
         widget=forms.EmailInput(attrs={
-            'class': 'form-control',
+            'class': 'form-control border rounded',
             'id': 'email',
             'placeholder': "Ваша почта"
         })
@@ -21,16 +21,16 @@ class FeedBackForm(forms.Form):
     subject = forms.CharField(
         max_length=200,
         widget=forms.TextInput(attrs={
-            'class': 'form-control',
+            'class': 'form-control border rounded',
             'id': 'subject',
             'placeholder': "Тема"
         })
     )
     message = forms.CharField(
         widget=forms.Textarea(attrs={
-            'class': 'form-control md-textarea',
-            'id': 'message',
-            'rows': 2,
+            'class': 'form-control border rounded',
+            'id': 'comments',
+            'rows': 4,
             'placeholder': "Ваше сообщение"
         })
     )

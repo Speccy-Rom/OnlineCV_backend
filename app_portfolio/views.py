@@ -61,7 +61,7 @@ class TagView(View):
         tag = get_object_or_404(Tag, slug=slug)
         posts = Portfolio.objects.filter(tag=tag)
         common_tags = Portfolio.stack.most_common()
-        return render(request, 'app_portfolio/tag/tag_portfolio.html', context={
+        return render(request, 'app_portfolio/tag/last_projects.html', context={
             'title': f'#ТЭГ {tag}',
             'posts': posts,
             'common_tags': common_tags
@@ -84,7 +84,7 @@ class FeedBackView(View):
             subject = form.cleaned_data['subject']
             message = form.cleaned_data['message']
             try:
-                send_mail(f'От {name} | {subject}', message, from_email, ['amromashov@gmail.com'])
+                send_mail(f'От {name} | {subject}', message, from_email, ['nimda.xd@gmail.com'])
             except BadHeaderError:
                 return HttpResponse('Невалидный заголовок')
             return HttpResponseRedirect('success')
