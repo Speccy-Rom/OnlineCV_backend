@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse_lazy
 from taggit.managers import TaggableManager
+from django.utils import timezone
 
 
 class Category(models.Model):
@@ -45,3 +46,16 @@ class Blog(models.Model):
         verbose_name = 'Статья'
         verbose_name_plural = 'Статьи'
         ordering = ['-created_at']
+
+
+class Comment(models.Model):
+    post = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='comments')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_name')
+    text = models.TextField()
+    created_date = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        ordering = ['-created_date']
+
+    def __str__(self):
+        return self.text
