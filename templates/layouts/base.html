@@ -1,0 +1,146 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8"/>
+    <title>{% block title %}{% endblock title%} :: Personal Portfolio Backend Developer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Premium Bootstrap 4 Landing Page Template"/>
+    <meta name="keywords" content="bootstrap 4, premium, marketing, multipurpose"/>
+    <meta content="Shreethemes" name="author"/>
+    <!-- favicon -->
+    <link rel="shortcut icon" href="{% static '/assets/images/favicon.ico' %}">
+    <!-- Bootstrap -->
+    <link href="{% static '/assets/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css"/>
+    <!-- Magnific -->
+    <link href="{% static '/assets/css/magnific-popup.css' %}" rel="stylesheet" type="text/css"/>
+    <!-- Icon -->
+    <link href="{% static '/assets/css/materialdesignicons.min.css' %}" rel="stylesheet" type="text/css"/>
+
+    <!-- SLICK SLIDER -->
+    <link rel="stylesheet" href="{% static '/assets/css/owl.carousel.min.css' %}"/>
+    <link rel="stylesheet" href="{% static '/assets/css/owl.theme.css' %}"/>
+    <link rel="stylesheet" href="{% static '/assets/css/owl.transitions.css' %}"/>
+    <!-- Custom Css -->
+    <link href="{% static '/assets/css/style.css' %}" rel="stylesheet" type="text/css" id="theme-opt"/>
+    <link href="{% static '/assets/css/colors/default.css' %}" rel="stylesheet" id="color-opt">
+    {% block stylesheets %}{% endblock stylesheets %}
+</head>
+
+<body>
+<!-- Loader -->
+<div id="preloader">
+    <div id="status">
+        <div class="logo">
+            <img src="{% static 'assets/images/logo.png' %}" height="20" class="d-block mx-auto" alt="">
+        </div>
+        <div class="spinner">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+    </div>
+</div>
+<!-- Loader -->
+
+<!-- Navbar Start -->
+<nav class="navbar navbar-expand-lg fixed-top navbar-custom navbar-light sticky">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img src="{% static 'assets/images/logo.png' %}" class="l-dark" height="16" alt="">
+            <img src="{% static 'assets/images/logo-light.png' %}" class="l-light" height="16" alt="">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span data-feather="menu" class="fea icon-md"></span>
+        </button><!--end button-->
+
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#home">Home</a>
+                </li><!--end nav item-->
+                <li class="nav-item">
+                    <a class="nav-link" href="#services">Services</a>
+                </li><!--end nav item-->
+                <li class="nav-item">
+                    <a class="nav-link" href="#resume">Resume</a>
+                </li><!--end nav item-->
+                <li class="nav-item">
+                    <a class="nav-link" href="#projects">Projects</a>
+                </li><!--end nav item-->
+                <li class="nav-item">
+                    <a class="nav-link" href="#news">Blog</a>
+                </li><!--end nav item-->
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">Contact</a>
+                </li><!--end nav item-->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages
+                    </a>
+                    <div class="dropdown-menu rounded m-0" aria-labelledby="navbarDropdown">
+                        <div class="container mx-0 mx-md-0">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <a class="dropdown-item" href="page-blog.html">Blog</a>
+                                    <a class="dropdown-item" href="page-blog-detail.html">Blog Detail</a>
+                                    <a class="dropdown-item" href="page-portfolio.html">Portfolio</a>
+                                    <a class="dropdown-item" href="page-portfolio-detail.html">Portfolio Detail</a>
+                                </div><!--end col-->
+                            </div><!--end row-->
+                        </div><!--end container-->
+                    </div>
+                </li><!--end nav item-->
+            </ul>
+
+            <ul class="list-unstyled mb-0 mt-2 mt-sm-0 social-icon light-social-icon">
+                <li class="list-inline-item"><a href="javascript:void(0)"><i class="mdi mdi-facebook"></i></a></li>
+                <li class="list-inline-item"><a href="javascript:void(0)"><i class="mdi mdi-twitter"></i></a></li>
+                <li class="list-inline-item"><a href="javascript:void(0)"><i class="mdi mdi-instagram"></i></a></li>
+            </ul>
+        </div>
+    </div><!--end container-->
+</nav><!--end navbar-->
+<!-- Navbar End -->
+
+{% block content %}{% endblock content %}
+
+<!-- Footer Start -->
+<footer class="footer bg-dark">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 text-center">
+                <a href="#"><img src="{% static 'assets/images/logo-light.png' %}" height="20" alt=""></a>
+                <p class="para-desc mx-auto mt-5">Obviously I'm a Web Designer. Experienced with all stages of the
+                    development cycle for dynamic web projects.</p>
+                <ul class="list-unstyled mb-0 mt-4 social-icon">
+                    <li class="list-inline-item"><a href="javascript:void(0)"><i class="mdi mdi-facebook"></i></a></li>
+                    <li class="list-inline-item"><a href="javascript:void(0)"><i class="mdi mdi-twitter"></i></a></li>
+                    <li class="list-inline-item"><a href="javascript:void(0)"><i class="mdi mdi-instagram"></i></a></li>
+                    <li class="list-inline-item"><a href="javascript:void(0)"><i class="mdi mdi-vimeo"></i></a></li>
+                    <li class="list-inline-item"><a href="javascript:void(0)"><i class="mdi mdi-google-plus"></i></a>
+                    </li>
+                    <li class="list-inline-item"><a href="javascript:void(0)"><i class="mdi mdi-linkedin"></i></a></li>
+                </ul>
+            </div><!--end col-->
+        </div><!--end row-->
+    </div><!--end container-->
+</footer><!--end footer-->
+<footer class="footer footer-bar bg-dark">
+    <div class="container text-foot text-center">
+        <p class="mb-0">© 2020-21 Speccy. Design with <i class="mdi mdi-heart text-danger"></i> by <a
+                href="https://web-cpv.ru" target="_blank" class="text-success">Speccy</a>.</p>
+    </div><!--end container-->
+</footer><!--end footer-->
+<!-- Footer End -->
+
+<!-- Back to top -->
+<a href="#" class="back-to-top rounded text-center" id="back-to-top">
+    <i class="mdi mdi-chevron-up d-block"> </i>
+</a>
+<!-- Back to top -->
+{% block javascripts %}{% endblock javascripts %}
+</body>
+</html>
