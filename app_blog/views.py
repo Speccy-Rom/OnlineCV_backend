@@ -55,7 +55,7 @@ class TagView(View):
         tag = get_object_or_404(Tag, slug=slug)
         posts = Blog.objects.filter(tag=tag)
         common_tags = Blog.tag.most_common()
-        return render(request, 'app_blog/tag/last_posts.html', context={
+        return render(request, 'app_blog/tags-blog.html', context={
             'title': f'#ТЭГ {tag}',
             'posts': posts,
             'common_tags': common_tags

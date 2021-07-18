@@ -58,9 +58,9 @@ class ViewProjects(DetailView):
 class TagView(View):
     def get(self, request, slug, *args, **kwargs):
         tag = get_object_or_404(Tag, slug=slug)
-        posts = Portfolio.objects.filter(tag=tag)
+        posts = Portfolio.objects.filter(stack=tag)
         common_tags = Portfolio.stack.most_common()
-        return render(request, 'app_portfolio/tag/last_projects.html', context={
+        return render(request, 'app_portfolio/tags-projects.html', context={
             'title': f'#ТЭГ {tag}',
             'posts': posts,
             'common_tags': common_tags
