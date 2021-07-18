@@ -12,7 +12,7 @@ from app_portfolio.models import Portfolio, Category
 class HomePage(View):
     def get(self, request, *args, **kwargs):
         projects = Portfolio.objects.all()
-        return render(request, 'index.html', {'projects': projects})
+        return render(request, 'index.html', {'projects': projects, 'title': 'Home'})
 
 
 class PortfolioByCategory(ListView):
@@ -33,7 +33,6 @@ class ListPortfolio(ListView):
     model = Portfolio
     template_name = 'app_portfolio/page-portfolio.html'
     context_object_name = 'projects'
-
     # extra_context = {'title': 'Главная'}
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -73,7 +72,7 @@ class FeedBackView(View):
         form = FeedBackForm()
         return render(request, 'index.html', context={
             'form': form,
-            'title': 'Написать мне'
+            'title': 'Home'
         })
 
     def post(self, request, *args, **kwargs):
