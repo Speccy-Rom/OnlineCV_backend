@@ -16,17 +16,18 @@ class HomePage(View):
 
 
 class PortfolioByCategory(ListView):
-    model = Portfolio
-    template_name = 'index.html'
-    context_object_name = 'get_categories'
-    allow_empty = True
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super(PortfolioByCategory, self).get_context_data()
-        context['title'] = Category.objects.get(slug=self.kwargs['slug'])
-
-    def get_queryset(self):
-        return Portfolio.objects.filter(slug=self.kwargs['slug'])
+    pass
+    # model = Portfolio
+    # template_name = 'index.html'
+    # context_object_name = 'get_categories'
+    # allow_empty = True
+    #
+    # def get_context_data(self, *, object_list=None, **kwargs):
+    #     context = super(PortfolioByCategory, self).get_context_data()
+    #     context['title'] = Category.objects.get(slug__iexact=self.kwargs['slug'])
+    #
+    # def get_queryset(self):
+    #     return Portfolio.objects.filter(slug__iexact=self.kwargs['slug'])
 
 
 class ListPortfolio(ListView):
@@ -36,7 +37,7 @@ class ListPortfolio(ListView):
     # extra_context = {'title': 'Главная'}
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        context = super(ListPortfolio, self).get_context_data()
+        context = super(ListPortfolio, self).get_context_data(**kwargs)
         context['title'] = 'My projects'
         return context
 
@@ -45,14 +46,15 @@ class ViewProjects(DetailView):
     model = Portfolio
     template_name = 'app_portfolio/page-portfolio-detail.html'
     context_object_name = 'detail_project'
-    allow_empty = True
+    allow_empty = False
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data()
-        context['title'] = Portfolio.objects.get(slug=self.kwargs['slug'])
+        context = super(ViewProjects, self).get_context_data(**kwargs)
+        context['title'] = Portfolio.objects.get(slug__iexact=self.kwargs['slug'])
+        return context
 
     def get_queryset(self):
-        return Portfolio.objects.filter(slug=self.kwargs['slug'])
+        return Portfolio.objects.filter(slug__iexact=self.kwargs['slug'])
 
 
 class TagView(View):

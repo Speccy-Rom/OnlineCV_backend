@@ -14,17 +14,16 @@ class BlogByCategory(ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(BlogByCategory, self).get_context_data()
-        context['title'] = Category.objects.get(slug=self.kwargs['slug'])
+        context['title'] = Category.objects.get(slug__iexact=self.kwargs['slug'])
 
     def get_queryset(self):
-        return Blog.objects.filter(slug=self.kwargs['slug'])
+        return Blog.objects.filter(slug__iexact=self.kwargs['slug'])
 
 
 class HomeBlog(ListView):
     model = Blog
     template_name = 'app_blog/page-blog.html'
     context_object_name = 'posts'
-
     # extra_context = {'title': 'Главная'}
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -40,14 +39,15 @@ class ViewPosts(DetailView):
     model = Blog
     template_name = 'app_blog/page-blog-detail.html'
     context_object_name = 'detail_post'
-    allow_empty = True
+    allow_empty = False  # обработка ситуации, когда у вас список пустой изначально. Если он выставлен в True,
+    # тогда вам выведется страница без результатов. Если False, то django сгенерирует стандартную ошибку 404.
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ViewPosts, self).get_context_data()
-        context['title'] = Blog.objects.get(slug=self.kwargs['slug'])
+        context['title'] = Blog.objects.get(slug__iexact=self.kwargs['slug'])
 
     def get_queryset(self):
-        return Blog.objects.filter(slug=self.kwargs['slug'])
+        return Blog.objects.filter(slug__iexact=self.kwargs['slug'])
 
 
 class TagView(View):

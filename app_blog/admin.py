@@ -12,9 +12,9 @@ class BlogAdmin(admin.ModelAdmin):
     # list_filter = ('category', 'created_at')
     # readonly_fields = ("get_image",)
     search_fields = ('title', 'description')
-    save_on_top = True  # управление навигацие отобразится сверху
+    save_on_top = True  # управление навигацией отобразится сверху
     save_as = True
-    list_editable = ("category", 'is_published')  # редактирование поля в таблице списков проектов
+    list_editable = ("category", 'is_published', 'tag')  # редактирование поля в таблице списков проектов
     fieldsets = (
         (None, {
             'fields': (('title', 'slug'),)

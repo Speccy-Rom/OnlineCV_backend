@@ -13,5 +13,11 @@ def get_categories():
 
 @register.inclusion_tag('app_portfolio/tag/last_projects.html')
 def get_last_projects(count=6):
-    projects = Portfolio.objects.order_by('id')[:count]
+    projects = Portfolio.objects.order_by('created_at')[:count]
     return {'last_projects': projects}
+
+
+@register.inclusion_tag('app_portfolio/tag/all_projects.html')
+def get_all_projects():
+    projects = Portfolio.objects.order_by('-created_at')
+    return {'all_projects': projects}
