@@ -10,7 +10,7 @@ urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('blog/', include('app_blog.urls')),
     path('api-auth/', include('rest_framework.urls')),
-    # path('api/v1/', include('app_api.urls')),
+    path('api/v1/', include('app_api.urls')),
     path("api/token/", TokenObtainPairView.as_view(), name="token"),
     path("api/refresh_token/", TokenRefreshView.as_view(), name="refresh_token"),
 ]

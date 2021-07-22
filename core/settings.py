@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'taggit',
+    'taggit_serializer',
 
     'app_api.apps.AppApiConfig',
     'app_blog.apps.AppBlogConfig',
