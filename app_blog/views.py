@@ -43,8 +43,9 @@ class ViewPosts(DetailView):
     # тогда вам выведется страница без результатов. Если False, то django сгенерирует стандартную ошибку 404.
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        context = super(ViewPosts, self).get_context_data()
+        context = super(ViewPosts, self).get_context_data(**kwargs)
         context['title'] = Blog.objects.get(slug__iexact=self.kwargs['slug'])
+        return context
 
     def get_queryset(self):
         return Blog.objects.filter(slug__iexact=self.kwargs['slug'])
