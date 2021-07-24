@@ -1,6 +1,6 @@
 from django import template
 
-from app_blog.models import Blog, Category
+from app_blog.models import Blog, CategoryBlog
 
 register = template.Library()
 
@@ -8,7 +8,7 @@ register = template.Library()
 @register.simple_tag()
 def get_categories():
     """Вывод всех категорий блога"""
-    return Category.objects.all()
+    return CategoryBlog.objects.all()
 
 
 @register.inclusion_tag('app_blog/tag/last_posts.html')

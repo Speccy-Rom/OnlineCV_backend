@@ -1,6 +1,6 @@
 from django import template
 
-from app_portfolio.models import Category, Portfolio
+from app_portfolio.models import CategoryPortfolio, Portfolio
 
 register = template.Library()
 
@@ -8,7 +8,7 @@ register = template.Library()
 @register.simple_tag()
 def get_categories():
     """Вывод всех категорий"""
-    return Category.objects.all()
+    return CategoryPortfolio.objects.all()
 
 
 @register.inclusion_tag('app_portfolio/tag/last_projects.html')

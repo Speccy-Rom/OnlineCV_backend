@@ -4,9 +4,9 @@ from django.urls import reverse_lazy
 from taggit.managers import TaggableManager
 
 
-class Category(models.Model):
-    """Категории"""
-    name = models.CharField(verbose_name="Название категория", max_length=150)
+class CategoryPortfolio(models.Model):
+    """Категории проектов"""
+    name = models.CharField(verbose_name="Название категория", max_length=150, db_index=True)
     description = RichTextUploadingField(blank=True, verbose_name='Описание')
     slug = models.SlugField(max_length=160, unique=True)
 
@@ -23,16 +23,16 @@ class Category(models.Model):
 
 class Portfolio(models.Model):
     """Модель проекта"""
-    title = models.CharField(max_length=250, verbose_name='Название')
+    title = models.CharField(max_length=250, verbose_name='Название', db_index=True)
     slug = models.SlugField(max_length=160, unique=True)
-    description = RichTextUploadingField(verbose_name='Описание проекта')
+    description = RichTextUploadingField(verbose_name='Описание проекта', db_index=True)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата публикации')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата обновления')
     image = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name='Фото проекта', blank=True)
     stack = TaggableManager()
     website = models.URLField(max_length=250, blank=True, verbose_name='GitHub')
     demo = models.URLField(max_length=250, blank=True, verbose_name='Демо')
-    category = models.ForeignKey('Category', on_delete=models.PROTECT, verbose_name='Категория',
+    category = models.ForeignKey('CategoryPortfolio', on_delete=models.PROTECT, verbose_name='Категория',
                                  related_name='get_news')
 
     def get_absolute_url(self):

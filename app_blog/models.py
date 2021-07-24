@@ -6,9 +6,9 @@ from taggit.managers import TaggableManager
 from django.utils import timezone
 
 
-class Category(models.Model):
+class CategoryBlog(models.Model):
     """Категории"""
-    name = models.CharField(verbose_name="Название категория", max_length=150)
+    name = models.CharField(verbose_name="Название категория", max_length=150, db_index=True)
     description = RichTextUploadingField(blank=True, verbose_name='Описание категории')
     slug = models.SlugField(max_length=160, unique=True)
 
@@ -24,16 +24,16 @@ class Category(models.Model):
 
 
 class Blog(models.Model):
-    title = models.CharField(max_length=250, verbose_name='Название')
-    slug = models.SlugField()
-    description = RichTextUploadingField(verbose_name='Контент')
+    title = models.CharField(max_length=250, verbose_name='Название', db_index=True)
+    slug = models.SlugField(unique=True)
+    description = RichTextUploadingField(verbose_name='Контент', db_index=True)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата публикации')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата обновления')
     image = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name='Фото портфолио', blank=True)
     is_published = models.BooleanField(default=True, verbose_name='Опубликовано')
     tag = TaggableManager()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    category = models.ForeignKey('Category', on_delete=models.PROTECT, verbose_name='Категория',
+    category = models.ForeignKey('CategoryBlog', on_delete=models.PROTECT, verbose_name='Категория',
                                  related_name='get_news')
 
     def get_absolute_url(self):

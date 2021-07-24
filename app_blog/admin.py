@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from .models import Blog, Category, Comment
+from .models import Blog, CategoryBlog, Comment
 
 
 @admin.register(Blog)
@@ -43,7 +43,7 @@ class BlogAdmin(admin.ModelAdmin):
     ####################################
 
 
-@admin.register(Category)
+@admin.register(CategoryBlog)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'description')
     prepopulated_fields = {'slug': ('name',)}

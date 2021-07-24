@@ -3,7 +3,7 @@ from django.views import View
 from django.views.generic import ListView, DetailView
 from taggit.models import Tag
 
-from app_blog.models import Blog, Category
+from app_blog.models import Blog, CategoryBlog
 
 
 class BlogByCategory(ListView):
@@ -14,7 +14,7 @@ class BlogByCategory(ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(BlogByCategory, self).get_context_data()
-        context['title'] = Category.objects.get(slug__iexact=self.kwargs['slug'])
+        context['title'] = CategoryBlog.objects.get(slug__iexact=self.kwargs['slug'])
 
     def get_queryset(self):
         return Blog.objects.filter(slug__iexact=self.kwargs['slug'])
