@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'app_api.apps.AppApiConfig',
     'app_blog.apps.AppBlogConfig',
     'app_portfolio.apps.AppPortfolioConfig',
+    'django_extensions'
 ]
 
 MIDDLEWARE = [

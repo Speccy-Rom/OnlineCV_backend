@@ -6,9 +6,9 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 urlpatterns = [
     path('', include('app_portfolio.urls')),
+    path('blog/', include('app_blog.urls')),
     path('admin/', admin.site.urls),
     path('ckeditor/', include('ckeditor_uploader.urls')),
-    path('blog/', include('app_blog.urls')),
     path('api-auth/', include('rest_framework.urls')),
     path('api/v1/', include('app_api.urls')),
     path("api/token/", TokenObtainPairView.as_view(), name="token"),
