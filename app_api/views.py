@@ -2,7 +2,7 @@ from rest_framework import generics, viewsets, permissions, pagination
 from rest_framework.response import Response
 from taggit.models import Tag
 
-from .serializers import PostSerializer, ProjectSerializer
+from .serializers import PostSerializer, ProjectSerializer, TagSerializer
 from app_blog.models import Blog
 from app_portfolio.models import Portfolio
 
@@ -55,3 +55,9 @@ class StackDetailView(generics.ListAPIView):
         tag_slug = self.kwargs['tag_slug'].lower()
         tag = Tag.objects.get(slug=tag_slug)
         return Portfolio.objects.filter(stack=tag)
+
+
+class TagsView(generics.ListAPIView):
+    serializer_class = TagSerializer
+    queryset = Tag.objects.all()
+    permission_classes = [permissions.AllowAny]
