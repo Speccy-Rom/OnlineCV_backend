@@ -2,7 +2,7 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
 from .views import PostViewSet, ProjectViewSet, TagDetailView, StackDetailView, TagsView, CategoryPortfolioView,\
-    LastPostView, LastProjectsView
+    LastPostView, LastProjectsView, FeedBackView
 
 router = DefaultRouter()
 router.register('posts', PostViewSet, basename='posts')
@@ -17,5 +17,6 @@ urlpatterns = [
     path('portfolio/tags/<slug:tag_slug>/', StackDetailView.as_view()),
     path('last_posts/', LastPostView.as_view()),
     path('last_projects/', LastProjectsView.as_view()),
+    path('feedback/', FeedBackView.as_view()),
 
 ]
