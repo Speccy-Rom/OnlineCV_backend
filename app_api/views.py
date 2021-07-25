@@ -1,4 +1,4 @@
-from rest_framework import generics, viewsets, permissions, pagination
+from rest_framework import generics, viewsets, permissions, pagination, filters
 from rest_framework.views import APIView
 from django.core.mail import send_mail
 from rest_framework.response import Response
@@ -20,6 +20,8 @@ class PageNumberSetPagination(pagination.PageNumberPagination):
 class PostViewSet(viewsets.ModelViewSet):
     """Вывод списка постов"""
 
+    search_fields = ['title', 'description']
+    filter_backends = filters.SearchFilter
     serializer_class = PostSerializer
     queryset = Blog.objects.all()
     lookup_field = 'slug'
@@ -30,6 +32,8 @@ class PostViewSet(viewsets.ModelViewSet):
 class ProjectViewSet(viewsets.ModelViewSet):
     """Вывод всех проектов"""
 
+    search_fields = ['title', 'description']
+    filter_backends = filters.SearchFilter
     serializer_class = ProjectSerializer
     queryset = Portfolio.objects.all()
     lookup_field = 'slug'
