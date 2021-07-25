@@ -5,8 +5,10 @@ from django.urls import reverse_lazy
 from taggit.managers import TaggableManager
 from django.utils import timezone
 
+from app_portfolio.models import Category
 
-class CategoryBlog(models.Model):
+
+class Category(models.Model):
     """Категории"""
     name = models.CharField(verbose_name="Название категория", max_length=150, db_index=True)
     description = RichTextUploadingField(blank=True, verbose_name='Описание категории')
@@ -33,7 +35,7 @@ class Blog(models.Model):
     is_published = models.BooleanField(default=True, verbose_name='Опубликовано')
     tag = TaggableManager()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    category = models.ForeignKey('CategoryBlog', on_delete=models.PROTECT, verbose_name='Категория',
+    category = models.ForeignKey('Category', on_delete=models.PROTECT, verbose_name='Категория',
                                  related_name='get_news')
 
     def get_absolute_url(self):

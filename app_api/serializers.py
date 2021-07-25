@@ -3,8 +3,8 @@ from taggit_serializer.serializers import TagListSerializerField, TaggitSerializ
 from django.contrib.auth.models import User
 from taggit.models import Tag
 
-from app_blog.models import Blog, CategoryBlog, Comment
-from app_portfolio.models import Portfolio, CategoryPortfolio
+from app_blog.models import Blog, Category, Comment
+from app_portfolio.models import Portfolio, Category
 
 
 class PostSerializer(TaggitSerializer, serializers.ModelSerializer):
@@ -44,19 +44,19 @@ class TagSerializer(serializers.ModelSerializer):
         }
 
 
-class CategoryBlogSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CategoryBlog
-        fields = ('id', 'name', 'slug', 'description')
-        lookup_field = 'slug'
-        extra_kwargs = {
-            'url': {'lookup_field': 'name'}
-        }
+# class CategoryBlogSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Category
+#         fields = ('id', 'name', 'slug', 'description')
+#         lookup_field = 'slug'
+#         extra_kwargs = {
+#             'url': {'lookup_field': 'name'}
+#         }
 
 
 class CategoryPortfolioSerializer(serializers.ModelSerializer):
     class Meta:
-        model = CategoryPortfolio
+        model = Category
         fields = ('id', 'name', 'slug', 'description')
         lookup_field = 'slug'
         extra_kwargs = {

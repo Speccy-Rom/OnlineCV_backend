@@ -6,7 +6,7 @@ from django.views.generic import ListView, DetailView
 from taggit.models import Tag
 
 from app_portfolio.forms import FeedBackForm
-from app_portfolio.models import Portfolio, CategoryPortfolio
+from app_portfolio.models import Portfolio, Category
 
 
 class HomePage(View):
@@ -24,7 +24,7 @@ class PortfolioByCategory(ListView):
     #
     # def get_context_data(self, *, object_list=None, **kwargs):
     #     context = super(PortfolioByCategory, self).get_context_data()
-    #     context['title'] = CategoryPortfolio.objects.get(slug__iexact=self.kwargs['slug'])
+    #     context['title'] = Category.objects.get(slug__iexact=self.kwargs['slug'])
     #
     # def get_queryset(self):
     #     return Portfolio.objects.filter(slug__iexact=self.kwargs['slug'])

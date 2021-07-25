@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from taggit.managers import TaggableManager
 
 
-class CategoryPortfolio(models.Model):
+class Category(models.Model):
     """Категории проектов"""
     name = models.CharField(verbose_name="Название категория", max_length=150, db_index=True)
     description = RichTextUploadingField(blank=True, verbose_name='Описание')
@@ -32,8 +32,8 @@ class Portfolio(models.Model):
     stack = TaggableManager()
     website = models.URLField(max_length=250, blank=True, verbose_name='GitHub')
     demo = models.URLField(max_length=250, blank=True, verbose_name='Демо')
-    category = models.ForeignKey('CategoryPortfolio', on_delete=models.PROTECT, verbose_name='Категория',
-                                 related_name='get_news')
+    category = models.ForeignKey('Category', on_delete=models.PROTECT, verbose_name='Категория',
+                                 related_name='get_projects')
 
     def get_absolute_url(self):
         return reverse_lazy('view_projects', kwargs={"slug": self.slug})

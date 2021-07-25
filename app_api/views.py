@@ -2,10 +2,9 @@ from rest_framework import generics, viewsets, permissions, pagination
 from rest_framework.response import Response
 from taggit.models import Tag
 
-from .serializers import PostSerializer, ProjectSerializer, TagSerializer, CategoryBlogSerializer, \
-    CategoryPortfolioSerializer
-from app_blog.models import Blog, CategoryBlog
-from app_portfolio.models import Portfolio, CategoryPortfolio
+from .serializers import PostSerializer, ProjectSerializer, TagSerializer, CategoryPortfolioSerializer
+from app_blog.models import Blog, Category
+from app_portfolio.models import Portfolio, Category
 
 
 # Create your views here.
@@ -64,13 +63,25 @@ class TagsView(generics.ListAPIView):
     permission_classes = [permissions.AllowAny]
 
 
-class CategoryBlogView(generics.ListAPIView):
-    serializer_class = CategoryBlogSerializer
-    queryset = CategoryBlog.objects.all()
-    permission_classes = [permissions.AllowAny]
+# class CategoryBlogView(generics.ListAPIView):
+#     serializer_class = CategoryBlogSerializer
+#     queryset = Category.objects.all()
+#     permission_classes = [permissions.AllowAny]
 
 
 class CategoryPortfolioView(generics.ListAPIView):
     serializer_class = CategoryPortfolioSerializer
-    queryset = CategoryPortfolio.objects.all()
+    queryset = Category.objects.all()
+    permission_classes = [permissions.AllowAny]
+
+
+class LastPostView(generics.ListAPIView):
+    serializer_class = PostSerializer
+    queryset = Blog.objects.order_by('-id')[:3]
+    permission_classes = [permissions.AllowAny]
+
+
+class LastProjectsView(generics.ListAPIView):
+    serializer_class = ProjectSerializer
+    queryset = Portfolio.objects.order_by('id')[:3]
     permission_classes = [permissions.AllowAny]

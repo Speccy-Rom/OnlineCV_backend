@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from .models import CategoryPortfolio, Portfolio
+from .models import Category, Portfolio
 
 
 @admin.register(Portfolio)
@@ -45,7 +45,7 @@ class PortfolioAdmin(admin.ModelAdmin):
     ####################################
 
 
-@admin.register(CategoryPortfolio)
+@admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'description', 'slug')
     prepopulated_fields = {'slug': ('name',)}
