@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from taggit.models import Tag
 
 from .serializers import PostSerializer, ProjectSerializer, TagSerializer, CategoryPortfolioSerializer, \
-    ContactSerializer
+    ContactSerializer, RegisterSerializer, UserSerializer
 from app_blog.models import Blog, Category
 from app_portfolio.models import Portfolio, Category
 
@@ -109,3 +109,20 @@ class FeedBackView(APIView):
             send_mail(f'От {name} | {subject}', message, from_email, ['nimda.xd@gmail.com'])
             return Response({"success": "Sent"})
 
+
+class RegisterView(generics.GenericAPIView):
+    serializer_class = RegisterSerializer
+    permission_classes = [permissions.AllowAny]
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.save()
+        return Response({
+            'user': UserSerializer(user, context=self.get_serializer_context()).data,
+            'message': 'Пользователь создан успешно'
+        })
+
+
+class ProfileView:
+        pass
