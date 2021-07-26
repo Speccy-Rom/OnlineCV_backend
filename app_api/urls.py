@@ -19,6 +19,6 @@ urlpatterns = [
     path('last_projects/', LastProjectsView.as_view()),
     path('feedback/', FeedBackView.as_view()),
     path('register/', RegisterView.as_view()),
-    # path('profile/', ProfileView.as_view()),
+    path('profile/', ProfileView.as_view()),
 
 ]
