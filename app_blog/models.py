@@ -52,11 +52,13 @@ class Blog(models.Model):
 
 class Comment(models.Model):
     post = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='comments')
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_name')
-    text = models.TextField()
-    created_date = models.DateTimeField(default=timezone.now)
+    username = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_name')
+    text = models.TextField(verbose_name='Комментарий')
+    created_date = models.DateTimeField(default=timezone.now, verbose_name='Дата публикации')
 
     class Meta:
+        verbose_name = 'Комментарий'
+        verbose_name_plural = 'Комментарии'
         ordering = ['-created_date']
 
     def __str__(self):

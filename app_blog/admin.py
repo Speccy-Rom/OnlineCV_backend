@@ -53,5 +53,5 @@ class BlogAdmin(admin.ModelAdmin):
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('id', 'post', 'author', 'text', 'created_date')
+    list_display = ('id', 'post', 'username', 'text', 'created_date')
     list_display_links = ('id', 'post')

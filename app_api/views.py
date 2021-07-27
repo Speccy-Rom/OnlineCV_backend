@@ -5,8 +5,8 @@ from rest_framework.response import Response
 from taggit.models import Tag
 
 from .serializers import PostSerializer, ProjectSerializer, TagSerializer, CategoryPortfolioSerializer, \
-    ContactSerializer, RegisterSerializer, UserSerializer
-from app_blog.models import Blog, Category
+    ContactSerializer, RegisterSerializer, UserSerializer, CommentSerializer
+from app_blog.models import Blog, Category, Comment
 from app_portfolio.models import Portfolio, Category
 
 
@@ -132,3 +132,14 @@ class ProfileView(generics.GenericAPIView):
         return Response({
             'user': UserSerializer(request.user, context=self.get_renderer_context()).data,
         })
+
+
+class CommentView(generics.ListCreateAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        post_slug = self.kwargs['post_slug'].lower()
+        post = Blog.objects.get(slug=post_slug)
+        return Comment.objects.filter(post=post)
